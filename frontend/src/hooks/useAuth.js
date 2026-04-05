@@ -5,7 +5,7 @@ export default function useAuth() {
 
   // ================= LOGIN =================
   const login = async (username, password) => {
-    const res = await fetch("http://localhost:5000/api/auth/login", {
+    const res = await fetch("http://localhost:3000/api/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -32,7 +32,7 @@ export default function useAuth() {
   // ================= FETCH USER =================
   const fetchUser = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/auth/me", {
+      const res = await fetch("http://localhost:3000/api/auth/me", {
         credentials: "include"
       });
 
@@ -54,7 +54,7 @@ export default function useAuth() {
 
   // ================= LOGOUT =================
   const logout = async () => {
-    await fetch("http://localhost:5000/api/auth/logout", {
+    await fetch("http://localhost:3000/api/auth/logout", {
       method: "POST",
       credentials: "include"
     });

@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import RepView from "./pages/RepView";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
           path="/dashboard/rep"
           element={
             <ProtectedRoute role="rep">
-              <Dashboard />
+              <RepView />
             </ProtectedRoute>
           }
         />
