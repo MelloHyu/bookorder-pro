@@ -16,7 +16,7 @@ router.post("/", requireAuth, async (req, res) => {
       .select("id")
       .eq("name", customer.name)
       .eq("address", customer.address)
-      .single();
+      .maybeSingle();
 
     let customer_id;
 
