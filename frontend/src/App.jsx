@@ -1,14 +1,36 @@
-import { useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
-  useEffect(() => {
-    fetch("http://localhost:5000")
-      .then(res => res.text())
-      .then(data => console.log("Backend says:", data))
-      .catch(err => console.error(err));
-  }, []);
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<Login />} />
 
-  return <h1>BookOrder Pro</h1>;
+        {/* 🔒 PROTECTED ROUTES */}
+        <Route
+          path="/dashboard/admin"
+          element={
+            <ProtectedRoute role="publisher">
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/dashboard/rep"
+          element={
+            <ProtectedRoute role="rep">
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;

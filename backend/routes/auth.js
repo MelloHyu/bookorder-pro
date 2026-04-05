@@ -48,7 +48,7 @@ router.post("/login", async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: false, // set true in production (https)
-      sameSite: "Strict",
+      sameSite: "Lax",
       maxAge: 24 * 60 * 60 * 1000
     });
 
@@ -67,6 +67,28 @@ router.post("/login", async (req, res) => {
 router.post("/logout", (req, res) => {
   res.clearCookie("token");
   res.json({ message: "Logged out" });
+});
+
+// GET CURRENT USER (for frontend persistence)
+router.get("/me", (req, res) => {
+  try {
+    const token = req.cookies.token;
+
+    if (!token) {
+      return res.status(401).json({ error: "Not authenticated" });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    res.json({
+      id: decoded.id,
+      username: decoded.username,
+      role: decoded.role
+    });
+
+  } catch (err) {
+    return res.status(401).json({ error: "Invalid token" });
+  }
 });
 
 export default router;
