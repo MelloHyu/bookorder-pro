@@ -19,7 +19,7 @@ app.use(
   cors({
     origin: "http://localhost:5173", // frontend (Vite)
     credentials: true, // 🔥 MUST be true for cookies
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     allowedHeaders: ["Content-Type"]
   })
 );
