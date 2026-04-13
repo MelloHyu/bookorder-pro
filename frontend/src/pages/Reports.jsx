@@ -16,17 +16,17 @@ export default function Reports() {
   }, []);
 
   const fetchBooks = async () => {
-    const res = await axios.get("/api/reports/books");
+    const res = await axios.get("/api/reports1/books");
     setBooks(res.data);
   };
 
   const fetchTitles = async () => {
-    const res = await axios.get("/api/reports/totals-per-title");
+    const res = await axios.get("/api/reports1/totals-per-title");
     setTitles(res.data);
   };
 
   const fetchReps = async () => {
-    const res = await axios.get("/api/reports/rep-performance", {
+    const res = await axios.get("/api/reports1/rep-performance", {
       params: { startDate, endDate }
     });
     setReps(res.data);
