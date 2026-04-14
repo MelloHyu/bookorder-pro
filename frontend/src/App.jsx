@@ -3,6 +3,8 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import RepView from "./pages/RepView";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Reports from "./pages/Reports";
+
 
 function App() {
   return (
@@ -10,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
-
+        <Route path="/reports" element={<Reports />} />
         {/* 🔒 PROTECTED ROUTES */}
         <Route
           path="/dashboard/admin"

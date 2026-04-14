@@ -1,0 +1,46 @@
+body {
+  font-family: Arial;
+}
+
+.reports {
+  padding: 20px;
+}
+
+.filters {
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 8px;
+}
+
+h1, h2 {
+  margin-top: 20px;
+}
+
+/* PRINT MODE */
+@media print {
+  .filters {
+    display: none;
+  }
+
+  button {
+    display: none;
+  }
+
+  body {
+    color: black;
+    background: white;
+  }
+
+  table {
+    page-break-inside: avoid;
+  }
+}
