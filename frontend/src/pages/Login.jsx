@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import "../styles/login.css";
@@ -11,6 +11,22 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // 🔥 rotating tagline
+  const taglines = [
+    "Manage smarter",
+    "Track orders",
+    "Grow faster"
+  ];
+  const [taglineIndex, setTaglineIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTaglineIndex((prev) => (prev + 1) % taglines.length);
+    }, 2500);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,61 +48,68 @@ export default function Login() {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-card">
+    <div className="login-page">
 
-        {/* Brand */}
-        <div className="login-brand">
-          <div className="login-brand-icon">📚</div>
+      {/* 🔥 LEFT SIDE */}
+      <div className="login-left">
+        <div className="left-bg"></div>
+
+        <div className="left-content">
           <h1>BookOrder Pro</h1>
-          <p>Sign in to your account</p>
+
+          <p key={taglineIndex} className="tagline">
+            {taglines[taglineIndex]}
+          </p>
+
+          <p className="subtext">
+            Built for publishers and sales teams
+          </p>
         </div>
-
-        {/* Form */}
-        <form className="login-form" onSubmit={handleSubmit}>
-          <div className="login-field">
-            <label htmlFor="username">Username</label>
-            <input
-              id="username"
-              type="text"
-              placeholder="Enter your username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-              autoComplete="username"
-              autoFocus
-            />
-          </div>
-
-          <div className="login-field">
-            <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              type="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              autoComplete="current-password"
-            />
-          </div>
-
-          {error && <p className="login-error">{error}</p>}
-
-          <button
-            type="submit"
-            className="login-btn"
-            disabled={loading}
-          >
-            {loading ? "Signing in..." : "Sign In"}
-          </button>
-        </form>
-
-        <p className="login-footer">
-          Access is managed by your publisher
-        </p>
-
       </div>
+
+      {/* ✅ RIGHT SIDE */}
+      <div className="login-right">
+        <div className="login-box">
+
+          <h2>Sign In</h2>
+
+          <form onSubmit={handleSubmit}>
+            <div className="login-field">
+              <label>Username</label>
+              <input
+                type="text"
+                placeholder="Enter username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="login-field">
+              <label>Password</label>
+              <input
+                type="password"
+                placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+
+            {error && <p className="login-error">{error}</p>}
+
+            <button type="submit" disabled={loading}>
+              {loading ? "Signing in..." : "Sign In"}
+            </button>
+          </form>
+
+          <p className="login-footer">
+            Access is managed by your publisher
+          </p>
+
+        </div>
+      </div>
+
     </div>
   );
 }
