@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import '../styles/dashboard.css';
 
@@ -159,6 +159,10 @@ export default function Dashboard() {
         <h1 style={{ margin: 0, fontSize: 20 }}>Publisher Dashboard</h1>
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
           <span style={{ fontSize: 14 }}>{user?.username}</span>
+          <Link to="/reports"
+            style={{ padding: '6px 14px', borderRadius: 6, background: '#2563eb', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 13, textDecoration: 'none' }}>
+            Reports
+          </Link>
           <button onClick={handleLogout}
             style={{ padding: '6px 14px', borderRadius: 6, background: '#ef4444', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 13 }}>
             Logout
