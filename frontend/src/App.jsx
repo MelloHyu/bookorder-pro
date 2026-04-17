@@ -12,7 +12,14 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/reports" element={<Reports />} />
+        <Route
+          path="/reports"
+          element={
+            <ProtectedRoute role="publisher">
+              <Reports />
+            </ProtectedRoute>
+          }
+        />
         {/* 🔒 PROTECTED ROUTES */}
         <Route
           path="/dashboard/admin"
